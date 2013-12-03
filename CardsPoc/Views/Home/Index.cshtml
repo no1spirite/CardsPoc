@@ -1,0 +1,92 @@
+﻿@using CardsPoc.Controllers
+<div class="contianer">
+    <div class="cards-container-javascript" data-bind="foreach: cards">
+        <div class="content" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }">
+            <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data } -->
+            <!-- /ko -->
+            
+            <!-- ko template: {'if': isCardType(1), name: 'donationTemplate', data: $data } -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <button data-bind="click: getMore">Get more</button>
+    
+    <noscript>
+        <div class="cards-container-wo-javascript" data-bind="foreach: cards">
+        @{
+            foreach (var card in Model.Cards)
+            {
+                String s = card.CardType.ToString();
+
+                switch (s)
+                {
+                    case "Message" : 
+                        <div class="content">
+                            <div class="message-container">
+                                <div class="image-container">
+                                    <img/>
+                                </div>
+                                <div class="content-container">
+                                    <div>@card.Content</div>
+                                </div>
+                            </div>    
+                        </div>
+                        break;
+                    case "Donation" :
+                    <div class="content">
+                        <div class="donation-container">
+                            <div class="image-container">
+                                <img src="@card.ImgUrl" />
+                            </div>  
+                            <div class="content-container">
+                                <div>@card.Content</div>
+                            </div>
+                        </div> 
+                        </div>
+                        break;
+                }
+            }
+        }
+
+            </div>  
+    </noscript>
+</div>
+
+
+
+
+<script type="text/html" id="messageTemplate"> 
+
+    <div class="message-container">
+        <div class="image-container">
+            <img/>
+        </div>
+        <div class="content-container">
+            <div data-bind="text: content"></div>
+        </div>
+    </div>    
+
+</script>
+
+<script type="text/html" id="donationTemplate"> 
+
+    <div class="donation-container">
+        <div class="image-container">
+            <img src="#" data-bind="attr: { 'src': imgUrl }"/>
+        </div>  
+        <div class="content-container">
+            <div data-bind="text: content"></div>
+        </div>
+    </div>    
+
+</script>
+
+
+<script>
+    var cardsJson = @Html.Raw(Json.Encode(Model.Cards));
+</script>
+
+@{
+    Bundles.Reference("~/bundles/home");
+}
+
