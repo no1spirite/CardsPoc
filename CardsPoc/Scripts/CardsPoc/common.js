@@ -4,7 +4,7 @@ Common.defaults = {
     type: { 0: 'Message', 1: 'Donation' },
     colCount: 0,
     colWidth: 0,
-    margin: 20,
+    margin: 0,
     containerWidth: 0,
     cards: [],
     killScroll: true

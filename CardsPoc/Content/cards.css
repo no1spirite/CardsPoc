@@ -13,30 +13,17 @@ body,
 }
 .cards-container-javascript .content {
   position: absolute;
-  width: 273px;
-}
-.cards-container-javascript .content-transition {
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  -ms-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
+  width: 23%;
 }
 .cards-container-javascript .message-container {
   background: blue;
   border-radius: 5px;
-  width: 253px;
   padding: 10px;
 }
 .cards-container-javascript .donation-container {
   background: green;
   border-radius: 5px;
-  width: 253px;
   padding: 10px;
-}
-.cards-container-javascript .donation-container .image-container img {
-  width: 253px;
-  height: 200px;
 }
 .cards-container-wo-javascript {
   max-width: 1280px;
