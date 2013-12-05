@@ -1,16 +1,12 @@
-﻿<div class="contianer">
-    
-    <div class="cards-container-javascript" data-bind="foreach: cardsViewModel.cards">
-        
-        <!-- ko if: isCardType(0) -->
-        <div class="content" data-bind="template: {name: 'messageTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } }, attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height"></div>
-        <!-- /ko -->
-
-        <!-- ko if: isCardType(1) -->
-        <div class="content" data-bind="template: {name: 'donationTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } }, attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height"></div>
-        <!-- /ko -->
-
-    </div>
+﻿<div class="pure-g-r cards-container-javascript" data-bind="foreach: cardsViewModel.cards, style: { 'height': (cardsViewModel.containerHeight() + 'px') }">
+        <div class="content pure-u-1-4" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height">
+            <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } } -->
+            <!-- /ko -->
+            
+            <!-- ko template: {'if': isCardType(1), name: 'donationTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } } -->
+            <!-- /ko -->
+        </div>
+</div>
         
 
     <noscript>
@@ -51,7 +47,6 @@
             }
         </div>  
     </noscript>
-</div>
 
 <script>
     var cardsJson = @Html.Raw(Json.Encode(Model.Cards));

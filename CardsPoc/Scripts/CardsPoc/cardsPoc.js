@@ -6,14 +6,14 @@
 
 var cardsViewModel = {};
 var CardsPoc = {
-    init: function(cardsJson) {
+    init: function (cardsJson) {
         this.setBindings(cardsJson);
         this.setScroll();
     },
     setBindings: function (cardsJson) {
-        cardsViewModel = new Cards();
+        this.cardsViewModel = new Cards();
         ko.applyBindings(CardsPoc, $(CardsPoc.defaults.$container).get(0));
-        cardsViewModel.update(cardsJson);
+        this.cardsViewModel.update(cardsJson);
     },
     setScroll: function() {
         $(window).scroll(function () {
@@ -33,7 +33,7 @@ var CardsPoc = {
     getMore: function (callback) {
         $.ajax("GetMore")
           .done(function (cardsJson) {
-              cardsViewModel.update(cardsJson);
+              CardsPoc.cardsViewModel.update(cardsJson);
               if (callback !== undefined) {
                   callback();
               }
@@ -41,12 +41,12 @@ var CardsPoc = {
     },
     refresh: function () {
         CardsPoc.setupCards(function() {
-            cardsViewModel.refresh();
+            CardsPoc.cardsViewModel.refresh();
         });
     },
     setupCards: function () {
         Common.defaults.containerWidth = $(CardsPoc.defaults.$cardsContainer).width();
-        Common.defaults.colWidth = $(CardsPoc.defaults.$content).outerWidth();
+        Common.defaults.colWidth = Math.floor($(CardsPoc.defaults.$content).get(0).getBoundingClientRect().width);
         Common.defaults.cards = [];
         Common.defaults.colCount = Math.floor(Common.defaults.containerWidth / (Common.defaults.colWidth + Common.defaults.margin * 2));
         for (var i = 0; i < Common.defaults.colCount; i++) {

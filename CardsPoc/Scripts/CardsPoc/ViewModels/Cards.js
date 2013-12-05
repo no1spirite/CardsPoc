@@ -8,6 +8,7 @@ var Cards = function () {
     var self = this;
     this.cards = ko.observableArray([]);
     this.loaded = ko.observable(false);
+    this.containerHeight = ko.observable(0);
 
     this.update = function (cardsJson) {
         $.each(cardsJson, function(key, value) {
@@ -20,6 +21,10 @@ var Cards = function () {
         self.loaded(true);  
     };
 
+    this.someFunction = function() {
+
+    };
+
     this.refresh = function () {
         $.each(self.cards(), function (key, value) {
             setCardPosition(value);
@@ -29,6 +34,7 @@ var Cards = function () {
 
     var setCardPosition = function(card) {
         var min = Array.min(Common.defaults.cards);
+        self.containerHeight(Array.max(Common.defaults.cards));
         var index = $.inArray(min, Common.defaults.cards);
         var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
         card.setPosition(leftPos, min);
