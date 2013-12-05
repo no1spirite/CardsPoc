@@ -50,7 +50,7 @@ var CardsPoc = {
     },
     setupCards: function (callback) {
         Common.defaults.containerWidth = $(CardsPoc.defaults.$cardsContainer).width();
-        Common.defaults.colWidth = Math.floor($(CardsPoc.defaults.$content).get(0).getBoundingClientRect().width);
+        Common.defaults.colWidth = Math.floor($(CardsPoc.defaults.$content).get(0).getBoundingClientRect().width || $(CardsPoc.defaults.$content).width());
         Common.defaults.cards = [];
         Common.defaults.colCount = Math.floor(Common.defaults.containerWidth / (Common.defaults.colWidth + Common.defaults.margin * 2));
         for (var i = 0; i < Common.defaults.colCount; i++) {
@@ -70,7 +70,8 @@ var CardsPoc = {
 };
 
 (function (cardsJson) {
-    CardsPoc.setupCards();
-    CardsPoc.init(cardsJson);
-    $(window).resize(CardsPoc.refresh);
+    CardsPoc.setupCards(function() {
+        CardsPoc.init(cardsJson);
+        $(window).resize(CardsPoc.refresh);
+    });
 })(cardsJson);
