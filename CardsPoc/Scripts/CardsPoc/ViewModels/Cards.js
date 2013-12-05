@@ -6,23 +6,21 @@
 
 var Cards = function () {
     var self = this;
+    var min = 0;
+    var index = 0;
     this.cards = ko.observableArray([]);
     this.loaded = ko.observable(false);
     this.containerHeight = ko.observable(0);
 
     this.update = function (cardsJson) {
-        $.each(cardsJson, function(key, value) {
+        $.each(cardsJson, function (key, value) {
             var card = new Card(self.cards().length);
-            card.update(value);   
+            card.update(value);
             setCardPosition(card);
             self.cards.push(card);
         });
 
-        self.loaded(true);  
-    };
-
-    this.someFunction = function() {
-
+        self.loaded(true);
     };
 
     this.refresh = function () {
@@ -32,10 +30,9 @@ var Cards = function () {
         });
     };
 
-    var setCardPosition = function(card) {
-        var min = Array.min(Common.defaults.cards);
-        self.containerHeight(Array.max(Common.defaults.cards));
-        var index = $.inArray(min, Common.defaults.cards);
+    var setCardPosition = function (card) {
+        min = Array.min(Common.defaults.cards);
+        index = $.inArray(min, Common.defaults.cards);
         var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
         card.setPosition(leftPos, min);
     };
