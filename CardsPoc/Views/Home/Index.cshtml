@@ -1,5 +1,5 @@
-﻿<div class="pure-g-r cards-container-javascript" data-bind="foreach: cardsViewModel.cards, style: { 'height': (cardsViewModel.containerHeight() + 'px') }">
-        <div class="content pure-u-1-4" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height">
+﻿<div class="pure-g-r cards-container-javascript" data-bind="foreach: cardsViewModel.cards, 'height-two-way': cardsViewModel.containerHeight">
+        <div class="content pure-u-1-4" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-one-way': $data.height">
             <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } } -->
             <!-- /ko -->
             

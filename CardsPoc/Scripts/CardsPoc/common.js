@@ -6,7 +6,9 @@ Common.defaults = {
     colWidth: 0,
     margin: 0,
     containerWidth: 0,
-    cards: []
+    cards: [],
+    infiniteScroll: true,
+    ajaxGetMethod: "GetMore"
 };
 
 Array.min = function (array) {

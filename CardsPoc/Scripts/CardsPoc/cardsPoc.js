@@ -8,7 +8,10 @@ var cardsViewModel = {};
 var CardsPoc = {
     init: function (cardsJson) {
         this.setBindings(cardsJson);
-        this.setScroll();
+        if (Common.defaults.infiniteScroll === true) {
+            this.setScroll();
+            CardsPoc.defaults.killScroll = false;
+        }
     },
     setBindings: function (cardsJson) {
         this.cardsViewModel = new Cards();
@@ -31,7 +34,7 @@ var CardsPoc = {
         Common.defaults.cards[$.inArray(Array.min(Common.defaults.cards), Common.defaults.cards)] = Array.min(Common.defaults.cards) + $(element).parent().get(0).scrollHeight + Common.defaults.margin;
     },
     getMore: function (callback) {
-        $.ajax("GetMore")
+        $.ajax(Common.defaults.ajaxGetMethod)
           .done(function (cardsJson) {
               CardsPoc.cardsViewModel.update(cardsJson);
               if (callback !== undefined) {
@@ -70,5 +73,4 @@ var CardsPoc = {
     CardsPoc.setupCards();
     CardsPoc.init(cardsJson);
     $(window).resize(CardsPoc.refresh);
-    CardsPoc.defaults.killScroll = false;
 })(cardsJson);
