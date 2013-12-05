@@ -7,7 +7,7 @@ Common.defaults = {
     margin: 0,
     containerWidth: 0,
     cards: [],
-    infiniteScroll: true,
+    infiniteScroll: false,
     ajaxGetMethod: "GetMore"
 };
 

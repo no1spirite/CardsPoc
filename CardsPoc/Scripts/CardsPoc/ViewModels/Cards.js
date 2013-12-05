@@ -19,6 +19,7 @@ var Cards = function () {
             setCardPosition(card);
             self.cards.push(card);
         });
+        self.containerHeight(Array.max(Common.defaults.cards));
 
         self.loaded(true);
     };
@@ -29,11 +30,12 @@ var Cards = function () {
             Common.defaults.cards[$.inArray(Array.min(Common.defaults.cards), Common.defaults.cards)] = Array.min(Common.defaults.cards) + $('#' + value.id()).get(0).scrollHeight + Common.defaults.margin;
             //Common.defaults.cards[index] = min + value.height() + Common.defaults.margin;
         });
+        self.containerHeight(Array.max(Common.defaults.cards));
     };
 
     var setCardPosition = function (card) {
         min = Array.min(Common.defaults.cards);
-        self.containerHeight(Array.max(Common.defaults.cards));
+        
         index = $.inArray(min, Common.defaults.cards);
         var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
         card.setPosition(leftPos, min);
