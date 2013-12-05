@@ -2,7 +2,7 @@
     <div class="content pure-u-1-4" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-one-way': $data.height">
         <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } } -->
         <!-- /ko -->
-            
+
         <!-- ko template: {'if': isCardType(1), name: 'donationTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } } -->
         <!-- /ko -->
     </div>
@@ -19,46 +19,53 @@
     <!-- /ko -->
 
 </div>*@
-        
+
 
 <noscript>
-        <div class="cards-container-wo-javascript" data-bind="foreach: cards">
-            @{
-                foreach (var card in Model.Cards)
-                {
-                    String s = card.CardType.ToString();
+    <h2>This site works best with JavaScript enabled</h2>
+    <div class="pure-g-r cards-container-wo-javascript" data-bind="foreach: cards">
 
-                    switch (s)
-                    {
-                        case "Message" : 
-                            <div class="content">
+        @{
+            foreach (var card in Model.Cards)
+            {
+                String s = card.CardType.ToString();
+
+                switch (s)
+                {
+                    case "Message":
+                        <div class="content pure-u-1-4">
+                            <div class="pure-gutter">
                                 <div class="message-container">
                                     <div class="image-container">
-                                        <img/>
+                                        <img />
                                     </div>
                                     <div class="content-container">
                                         <div>@card.Content</div>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
-                            break;
-                        case "Donation" :
-                            <div class="content">
+                        </div>
+                        break;
+                    case "Donation":
+                        <div class="content pure-u-1-4">
+                            <div class="pure-gutter">
                                 <div class="donation-container">
                                     <div class="image-container">
                                         <img src="@card.ImgUrl" />
-                                    </div>  
+                                    </div>
                                     <div class="content-container">
                                         <div>@card.Content</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
-                            break;
-                    }
+                        </div>
+                        break;
                 }
             }
-        </div>  
-    </noscript>
+        }
+
+    </div>
+</noscript>
 
 <script>
     var cardsJson = @Html.Raw(Json.Encode(Model.Cards));
