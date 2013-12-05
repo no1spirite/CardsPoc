@@ -28,7 +28,7 @@ var CardsPoc = {
     },
     setupCards: function (callback) {
         Common.defaults.containerWidth = $('.cards-container-javascript').width();
-        Common.defaults.colWidth = $('.content').outerWidth();
+        Common.defaults.colWidth = Math.floor($('.content').get(0).getBoundingClientRect().width);
         Common.defaults.cards = [];
         Common.defaults.colCount = Math.floor(Common.defaults.containerWidth / (Common.defaults.colWidth + Common.defaults.margin * 2));
         for (var i = 0; i < Common.defaults.colCount; i++) {

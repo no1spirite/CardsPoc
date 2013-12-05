@@ -1,14 +1,15 @@
-﻿<div class="contianer">
-    <div class="cards-container-javascript" data-bind="foreach: cards">
-        <div class="content" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }">
+﻿    <div class="pure-g-r cards-container-javascript" data-bind="foreach: cards, 'style': { 'height': ($data.containerHeight() + 'px') }">
+        <div class="content pure-u-1-4" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }">
+            <div class="pure-gutter">
             <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data } -->
             <!-- /ko -->
             
             <!-- ko template: {'if': isCardType(1), name: 'donationTemplate', data: $data } -->
             <!-- /ko -->
+            </div>
         </div>
     </div>
-    <button data-bind="click: getMore">Get more</button>
+@*    <button data-bind="click: getMore">Get more</button>*@
     
     <noscript>
         <div class="cards-container-wo-javascript" data-bind="foreach: cards">
@@ -48,7 +49,6 @@
             }
         </div>  
     </noscript>
-</div>
 
 <script>
     var cardsJson = @Html.Raw(Json.Encode(Model.Cards));
