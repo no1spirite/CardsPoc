@@ -11,7 +11,8 @@ var Card = function (id) {
     this.imgUrl = ko.observable("");
     this.left = ko.observable(20);
     this.top = ko.observable(20);
-
+    this.height = ko.observable();
+    
     this.isCardType = function(cardType) {
         return Common.defaults.type[self.cardType()] == Common.defaults.type[cardType];
     };

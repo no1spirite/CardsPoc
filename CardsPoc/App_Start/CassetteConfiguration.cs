@@ -28,6 +28,7 @@ namespace CardsPoc.App_Start
                           new[]
                                           {
                                               "~/Scripts/CardsPoc/common.js",
+                                              "~/Scripts/Extensions/knockout.extensions.js",
                                               "~/Scripts/CardsPoc/ViewModels/card.js",
                                               "~/Scripts/CardsPoc/ViewModels/cards.js",
                                               "~/Scripts/CardsPoc/cardsPoc.js"

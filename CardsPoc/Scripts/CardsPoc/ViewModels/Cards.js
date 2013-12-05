@@ -6,8 +6,6 @@
 
 var Cards = function () {
     var self = this;
-    var index = 0;
-    var min = 0;
     this.cards = ko.observableArray([]);
     this.loaded = ko.observable(false);
 
@@ -15,12 +13,8 @@ var Cards = function () {
         $.each(cardsJson, function(key, value) {
             var card = new Card(self.cards().length);
             card.update(value);   
-            min = Array.min(Common.defaults.cards);
-            index = $.inArray(min, Common.defaults.cards);
-            var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
-            card.setPosition(leftPos, min);
+            setCardPosition(card);
             self.cards.push(card);
-            self.saveCard(card);
         });
 
         self.loaded(true);  
@@ -28,25 +22,15 @@ var Cards = function () {
 
     this.refresh = function () {
         $.each(self.cards(), function (key, value) {
-            min = Array.min(Common.defaults.cards);
-            index = $.inArray(min, Common.defaults.cards);
-            var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
-            value.setPosition(leftPos, min);
-            self.saveCard(value);
+            setCardPosition(value);
+            Common.defaults.cards[index] = min + value.height() + Common.defaults.margin;
         });
     };
 
-    this.saveCard = function(card) {
-        Common.defaults.cards[index] = min + $('#' + card.id()).get(0).scrollHeight + Common.defaults.margin;
-    };
-
-    this.getMore = function(callback) {
-        $.ajax("GetMore")
-            .done(function(cardsJson) {
-                self.update(cardsJson);
-                if (callback !== undefined) {
-                    callback();
-                }
-            });
+    var setCardPosition = function(card) {
+        var min = Array.min(Common.defaults.cards);
+        var index = $.inArray(min, Common.defaults.cards);
+        var leftPos = Common.defaults.margin + (index * (Common.defaults.colWidth + Common.defaults.margin));
+        card.setPosition(leftPos, min);
     };
 }

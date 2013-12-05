@@ -6,8 +6,7 @@ Common.defaults = {
     colWidth: 0,
     margin: 0,
     containerWidth: 0,
-    cards: [],
-    killScroll: true
+    cards: []
 };
 
 Array.min = function (array) {

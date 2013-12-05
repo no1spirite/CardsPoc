@@ -1,15 +1,18 @@
 ﻿<div class="contianer">
-    <div class="cards-container-javascript" data-bind="foreach: cards">
-        <div class="content" data-bind="attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }">
-            <!-- ko template: {'if': isCardType(0), name: 'messageTemplate', data: $data } -->
-            <!-- /ko -->
-            
-            <!-- ko template: {'if': isCardType(1), name: 'donationTemplate', data: $data } -->
-            <!-- /ko -->
-        </div>
-    </div>
-    <button data-bind="click: getMore">Get more</button>
     
+    <div class="cards-container-javascript" data-bind="foreach: cardsViewModel.cards">
+        
+        <!-- ko if: isCardType(0) -->
+        <div class="content" data-bind="template: {name: 'messageTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } }, attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height"></div>
+        <!-- /ko -->
+
+        <!-- ko if: isCardType(1) -->
+        <div class="content" data-bind="template: {name: 'donationTemplate', data: $data, afterRender: function (element) { $parent.afterInitialCardRender(element); } }, attr: { 'id' : $data.id }, 'style': { 'left': ($data.left() + 'px'), 'top': ($data.top() + 'px') }, css: { 'content-transition': $parent.loaded }, 'height-two-way': $data.height"></div>
+        <!-- /ko -->
+
+    </div>
+        
+
     <noscript>
         <div class="cards-container-wo-javascript" data-bind="foreach: cards">
             @{
